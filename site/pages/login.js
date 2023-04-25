@@ -2,16 +2,38 @@ import React, { useState } from "react";
 import styles from "../styles/apply.module.css";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Apply = () => {
+  const rounter = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
-    toast("You are Logged in");
-    setEmail('')
-    setPassword('')
+
+    fetch("http://localhost:8080/api/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          toast("Login successfully");
+          localStorage.setItem("LinkTree", data.token);
+          rounter.push("/dashboard");
+        }
+        if (data.status === "not found") {
+          toast.error("User not found!");
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -39,7 +61,8 @@ const Apply = () => {
                   className="rounded-md focus:outline-none"
                   placeholder="Enter your email"
                   type="email"
-                  value={email} onChange={(e)=>setEmail(e.target.value)}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                 />
               </span>
@@ -47,7 +70,8 @@ const Apply = () => {
                 className="shadow-md border-2 px-3 py-4 rounded-md focus:outline-none"
                 placeholder="Set a password"
                 type="password"
-                value={password} onChange={(e)=>setPassword(e.target.value)}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
 
