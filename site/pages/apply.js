@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import styles from '../styles/apply.module.css'
 import {toast} from 'react-toastify'
+import Link from 'next/link'
 
 const Apply = () => {
 
+  const [handle, setHandle] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [category,setCategory] = useState('')
 
   const handleCategoryChange = (e) =>{
@@ -28,12 +32,12 @@ const Apply = () => {
             <form onSubmit={handleRegister} className='flex flex-col gap-4 text-lg mt-5'>
               <span className='flex flex-row shadow-md border-2 px-3 py-4 rounded-md focus:outline-none'>
                 <img src="/svg/instragam.svg" alt="instragam" className='w-8 mr-3' />
-                <input className='focus:outline-none' placeholder='Social Handle' type="text" required/>
+                <input className='focus:outline-none' placeholder='Social Handle' type="text" value={handle} onChange={(e)=>setHandle(e.target.value)} required/>
               </span>
 
-              <input className='shadow-md border-2 px-3 py-4 rounded-md focus:outline-none' placeholder='Enter your email' type="email" required/>
+              <input className='shadow-md border-2 px-3 py-4 rounded-md focus:outline-none' placeholder='Enter your email' type="email" value={email} onChange={(e)=>setEmail(e.target.value)} required/>
 
-              <input className='shadow-md border-2 px-3 py-4 rounded-md focus:outline-none' placeholder='Set a password' type="password" required/>
+              <input className='shadow-md border-2 px-3 py-4 rounded-md focus:outline-none' placeholder='Set a password' type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
 
               <h5 className='text-sm text-center text-indigo-400 font-medium'>Account Type:</h5>
               <span className='flex' aria-required>
@@ -54,6 +58,13 @@ const Apply = () => {
               <button className='text-white bg-indigo-500 py-2 rounded-lg' type="submit">Register</button>
             </form>
           </div>
+
+          <h4 className="text-center text-white pt-3">
+            Already have an account? {" "}
+            <Link href="/login" className="font-bold text-red-400">
+              Login
+            </Link>
+          </h4>
         </div>
       </section>
     </>
