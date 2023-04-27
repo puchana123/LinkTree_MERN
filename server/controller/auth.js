@@ -6,7 +6,7 @@ const registerUser = async (req, res) => {
   console.log(req.body);
 
   try {
-    const defaultLink = { url: "google.com", title: "google", icon: "" };
+    const defaultLink = { url: "http://google.com", title: "google", icon: "" };
     const user = await User.userModel.create({
       handle,
       email,

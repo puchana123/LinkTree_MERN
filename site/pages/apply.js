@@ -72,7 +72,7 @@ const Apply = () => {
             >
               <span className="flex flex-row shadow-md border-2 px-3 py-4 rounded-md focus:outline-none">
                 <img
-                  src="/svg/instragam.svg"
+                  src="/svg/instagram.svg"
                   alt="instragam"
                   className="w-8 mr-3"
                 />
