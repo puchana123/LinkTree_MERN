@@ -6,7 +6,11 @@ const User = new Schema(
     name: { type: String },
     bio: { type: String },
     email: { type: String, require: true, unique: true },
-    avatar: { type: String },
+    avatar: {
+      type: String,
+      default:
+        "https://cdn.pixabay.com/photo/2014/04/03/11/47/avatar-312160_960_720.png",
+    },
     password: { type: String, require: true },
     role: {
       type: String,
