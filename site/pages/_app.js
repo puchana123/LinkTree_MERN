@@ -1,17 +1,25 @@
 import "../styles/globals.css";
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import Footer from "../components/Footer";
 import NavBar from "../components/Navbar";
-import NProgress from 'nprogress';
-import '../public/nprogress.css';
-import { ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Script from 'next/script';
+import NProgress from "nprogress";
+import "../public/nprogress.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Script from "next/script";
+import UserContext from "@/context/userContext";
 
 export default function App({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  const [userData, setUserData] = useState({
+    name: "",
+    role: "",
+    avatar: "",
+    handle: "",
+  });
 
   useEffect(() => {
     const handleStart = () => {
@@ -23,23 +31,26 @@ export default function App({ Component, pageProps }) {
       NProgress.done();
     };
 
-    router.events.on('routeChangeStart', handleStart);
-    router.events.on('routeChangeComplete', handleComplete);
-    router.events.on('routeChangeError', handleComplete);
+    router.events.on("routeChangeStart", handleStart);
+    router.events.on("routeChangeComplete", handleComplete);
+    router.events.on("routeChangeError", handleComplete);
 
     return () => {
-      router.events.off('routeChangeStart', handleStart);
-      router.events.off('routeChangeComplete', handleComplete);
-      router.events.off('routeChangeError', handleComplete);
+      router.events.off("routeChangeStart", handleStart);
+      router.events.off("routeChangeComplete", handleComplete);
+      router.events.off("routeChangeError", handleComplete);
     };
   }, []);
 
-  return(
+  return (
     <>
-    <NavBar/>
-    <Script strategy="lazyOnload" src={`https://www.googletagmanager.com/gtag/js?id=G-WYTYXQXVK6`} />
-    <Script strategy="lazyOnload">
-                {`
+      <NavBar />
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=G-WYTYXQXVK6`}
+      />
+      <Script strategy="lazyOnload">
+        {`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
                     gtag('js', new Date());
@@ -47,12 +58,16 @@ export default function App({ Component, pageProps }) {
                     page_path: window.location.pathname,
                     });
                 `}
-    </Script>
-    <Component {...pageProps} />
-    <ToastContainer />
-    {isLoading && <div className="nprogress-custom-parent"><div className="nprogress-custom-bar"/></div>}
-    <Footer/>
-
+      </Script>
+      <UserContext.Provider value={{ userData, setUserData }}>
+        <Component {...pageProps} />
+      </UserContext.Provider>
+      <ToastContainer />
+      {isLoading && (
+        <div className="nprogress-custom-parent">
+          <div className="nprogress-custom-bar" />
+        </div>
+      )}
     </>
-  ) 
+  );
 }

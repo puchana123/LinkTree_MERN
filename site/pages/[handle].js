@@ -28,6 +28,7 @@ const Handle = () => {
           if (data.status === "error") return toast.error(data.error);
           if (data.status === "success") {
             setData(data.userData);
+            setSocials(data.socials);
             setUserFound(true);
           }
         })
@@ -35,19 +36,19 @@ const Handle = () => {
     }
   }, [router.query]);
 
-  useEffect(() => {
-    if (router.query?.handle) {
-      fetch(`http://localhost:8080/get/socials/${router.query.handle}`)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.status === "error") return toast.error(data.error);
-          if (data.status === "success") {
-            setSocials(data.socials);
-          }
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [router.query]);
+  // useEffect(() => {
+  //   if (router.query?.handle) {
+  //     fetch(`http://localhost:8080/get/socials/${router.query.handle}`)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         if (data.status === "error") return toast.error(data.error);
+  //         if (data.status === "success") {
+
+  //         }
+  //       })
+  //       .catch((err) => console.log(err));
+  //   }
+  // }, [router.query]);
 
   if (!userFound) {
     return (

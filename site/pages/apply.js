@@ -3,6 +3,7 @@ import styles from "../styles/apply.module.css";
 import { toast } from "react-toastify";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Footer from "@/components/Footer";
 
 const Apply = () => {
   const router = useRouter();
@@ -38,7 +39,7 @@ const Apply = () => {
       .then((data) => {
         if (data.status === "success") {
           toast("You are registered successfully");
-          localStorage.setItem("LinkTree", data.token);
+          localStorage.setItem("LinkTreeToken", data.token);
           setSubmitted(true);
           router.push("/login");
         }
@@ -154,6 +155,7 @@ const Apply = () => {
           </h4>
         </div>
       </section>
+      <Footer />
     </>
   );
 };

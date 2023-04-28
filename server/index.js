@@ -4,7 +4,13 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const { registerUser, loginUser } = require("./controller/auth");
 const dashBoardData = require("./controller/dashBoardData");
-const { getUserData, getUserSocials } = require("./controller/getUserData");
+const { getUserData } = require("./controller/getUserData");
+const {
+  saveSocials,
+  saveProfile,
+  saveLinks,
+} = require("./controller/saveItems");
+const { loadSocials, loadLinks } = require("./controller/loadPrevious");
 
 require("dotenv").config();
 
@@ -30,7 +36,12 @@ app.post("/api/dashboard", dashBoardData);
 
 app.get("/get/:handle", getUserData);
 
-app.get("/get/socials/:handle", getUserSocials);
+app.post("/save/socials", saveSocials);
+app.post("/save/profile", saveProfile);
+app.post("/save/links", saveLinks);
+
+app.post("/load/socials", loadSocials);
+app.post("/load/links", loadLinks);
 
 const port = process.env.PORT || 8080;
 

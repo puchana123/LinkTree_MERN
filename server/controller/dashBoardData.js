@@ -16,6 +16,7 @@ const dashBoardData = async (req, res) => {
       avatar: user.avatar,
       handle: user.handle,
       links: user.links.length,
+      bio: user.bio,
     };
     return res.json({
       message: "received User data",

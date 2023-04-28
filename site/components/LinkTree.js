@@ -28,7 +28,11 @@ const LinkTree = ({ data }) => {
                   transition: { delay: index * 0.1 + 0.5 },
                 }}
               >
-                <LinkTreeCard title={link.title} url={link.url} />
+                <LinkTreeCard
+                  title={link.title}
+                  url={link.url}
+                  image={link.icon}
+                />
               </motion.div>
             ))}
           </AnimatePresence>

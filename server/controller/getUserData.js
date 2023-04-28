@@ -4,30 +4,24 @@ const getUserData = async (req, res) => {
   const handle = req.params.handle;
   try {
     const user = await User.userModel.findOne({ handle: handle });
+    const socials = user.socialMedia;
     console.log(user);
 
     const userData = {
-      name: user.handle,
+      name: user.name,
       avatar: user.avatar,
       bio: user.bio,
       links: user.links,
     };
-    return res.json({ message: "Found data", userData, status: "success" });
+    return res.json({
+      message: "Found data",
+      userData,
+      socials,
+      status: "success",
+    });
   } catch (err) {
     return res.json({ error: err.message, status: "error" });
   }
 };
 
-const getUserSocials = async (req, res) => {
-  const handle = req.params.handle;
-  try {
-    console.log(handle);
-    const user = await User.userModel.findOne({ handle: handle });
-    const socials = user.socialMedia;
-    return res.json({ message: "found data", socials, status: "success" });
-  } catch (err) {
-    return res.json({ message: err.message, status: "error" });
-  }
-};
-
-module.exports = { getUserData, getUserSocials };
+module.exports = { getUserData };
