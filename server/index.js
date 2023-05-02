@@ -10,7 +10,11 @@ const {
   saveProfile,
   saveLinks,
 } = require("./controller/saveItems");
-const { loadSocials, loadLinks } = require("./controller/loadPrevious");
+const {
+  loadSocials,
+  loadLinks,
+  loadHandle,
+} = require("./controller/loadPrevious");
 
 require("dotenv").config();
 
@@ -42,6 +46,7 @@ app.post("/save/links", saveLinks);
 
 app.post("/load/socials", loadSocials);
 app.post("/load/links", loadLinks);
+app.post("/load/handle", loadHandle);
 
 const port = process.env.PORT || 8080;
 

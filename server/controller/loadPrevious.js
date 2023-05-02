@@ -31,4 +31,19 @@ const loadLinks = async (req, res) => {
   }
 };
 
-module.exports = { loadSocials, loadLinks };
+const loadHandle = async (req, res) => {
+  const { tokenMail } = req.body;
+  try {
+    const decodedTokenMail = jwt_decode(tokenMail, process.env.SECRET_JWT);
+    const email = decodedTokenMail.email;
+
+    const user = await userModel.findOne({ email: email });
+    const handle = user.handle;
+
+    return res.json({ message: "found", handle, status: "success" });
+  } catch (err) {
+    return res.json({ error: err.message, status: "error" });
+  }
+};
+
+module.exports = { loadSocials, loadLinks, loadHandle };

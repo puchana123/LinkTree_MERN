@@ -51,7 +51,9 @@ const saveLinks = async (req, res) => {
     const newLinks = links.map((link) => ({
       url: link.link.url,
       title: link.link.title,
-      icon: link.link.icon,
+      icon:
+        link.link.icon ||
+        "https://cdn.pixabay.com/photo/2016/11/30/17/10/web-1873373_960_720.png",
     }));
     user.links = newLinks;
     await user.save();
