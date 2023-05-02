@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Footer from "@/components/Footer";
+import MyHead from "@/components/MyHead";
 
 const Apply = () => {
   const rounter = useRouter();
@@ -39,6 +40,7 @@ const Apply = () => {
 
   return (
     <>
+      <MyHead title="Login" />
       <section
         className={`${styles.background} min-h-screen flex justify-center items-center`}
       >

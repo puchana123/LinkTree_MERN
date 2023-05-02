@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import Link from "next/link";
 import SocialTree from "@/components/SocialTree";
 import ShareButton from "@/components/ShareButton";
+import MyHead from "@/components/MyHead";
 
 const Handle = () => {
   const router = useRouter();
@@ -36,23 +37,10 @@ const Handle = () => {
     }
   }, [router.query]);
 
-  // useEffect(() => {
-  //   if (router.query?.handle) {
-  //     fetch(`http://localhost:8080/get/socials/${router.query.handle}`)
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         if (data.status === "error") return toast.error(data.error);
-  //         if (data.status === "success") {
-
-  //         }
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, [router.query]);
-
   if (!userFound) {
     return (
       <div className="flex justify-center text-center h-screen items-center">
+        <MyHead title="User Not Found" />
         <div className="not-found px-3">
           <h1 className="font-bold text-lg">User Not Found 😔</h1>
           <p>If you're looking for a page, please check the spelling.</p>
@@ -72,6 +60,7 @@ const Handle = () => {
 
   return (
     <div>
+      <MyHead title={router.query.handle} />
       <ShareButton />
       <LinkTree data={data} />
       <SocialTree social={socials} />

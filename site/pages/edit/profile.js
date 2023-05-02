@@ -3,6 +3,7 @@ import UserContext from "@/context/userContext";
 import UserHeader from "@/components/UserHeader";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import MyHead from "@/components/MyHead";
 
 const profile = () => {
   const { userData, setUserData } = useContext(UserContext);
@@ -101,6 +102,7 @@ const profile = () => {
 
   return (
     <>
+      <MyHead title="Edit Profile" />
       <div>
         <UserHeader />
         <main className="h-full">

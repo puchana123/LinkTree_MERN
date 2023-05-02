@@ -13,6 +13,7 @@ import UserContext from "@/context/userContext";
 export default function App({ Component, pageProps }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const [isLogin, setIsLogin] = useState(false);
 
   const [userData, setUserData] = useState({
     name: "",
@@ -44,7 +45,6 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <NavBar />
       <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=G-WYTYXQXVK6`}
@@ -59,7 +59,10 @@ export default function App({ Component, pageProps }) {
                     });
                 `}
       </Script>
-      <UserContext.Provider value={{ userData, setUserData }}>
+      <UserContext.Provider
+        value={{ userData, setUserData, isLogin, setIsLogin }}
+      >
+        <NavBar />
         <Component {...pageProps} />
       </UserContext.Provider>
       <ToastContainer />

@@ -9,10 +9,11 @@ const UserHeader = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("LinkTreeToken");
+    setIsLogin(false);
     router.push("/login");
   };
 
-  const { setUserData, userData } = useContext(UserContext);
+  const { setUserData, userData, setIsLogin } = useContext(UserContext);
   const { role, avatar, handle } = userData;
 
   useEffect(() => {
@@ -33,7 +34,6 @@ const UserHeader = () => {
         if (data.status === "error") return toast.error("Error happened");
         setUserData(data.userData);
         localStorage.setItem("userHandle", data.userData.handle);
-        toast.success(data.message);
       })
       .catch((err) => {
         console.log(err);

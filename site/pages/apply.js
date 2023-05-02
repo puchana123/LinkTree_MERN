@@ -54,6 +54,7 @@ const Apply = () => {
 
   return (
     <>
+      <MyHead title="Apply" />
       <section
         className={`${styles.background} min-h-screen flex justify-center items-center`}
       >

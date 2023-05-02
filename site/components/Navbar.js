@@ -1,10 +1,12 @@
+import UserContext from "@/context/userContext";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 const NavBar = () => {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isLogin } = useContext(UserContext);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
@@ -23,8 +25,8 @@ const NavBar = () => {
               className="h-8 mr-3"
               alt="Company Logo"
             />
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-              Template
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white tracking-widest">
+              LinkTree
             </span>
           </Link>
           <button
@@ -66,14 +68,14 @@ const NavBar = () => {
                   Home
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   href="/apply"
                   className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
                   Apply
                 </Link>
-              </li>
+              </li> */}
               <li>
                 <Link
                   href="/features"
@@ -84,20 +86,31 @@ const NavBar = () => {
               </li>
               <li>
                 <Link
-                  href="#"
+                  href="/gallery"
                   className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                 >
-                  Custom
+                  Gallery
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/dashboard"
-                  className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                >
-                  Dashboard
-                </Link>
-              </li>
+              {isLogin ? (
+                <li>
+                  <Link
+                    href="/dashboard"
+                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              ) : (
+                <li>
+                  <Link
+                    href="/login"
+                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                  >
+                    Login
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>

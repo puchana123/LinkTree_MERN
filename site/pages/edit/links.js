@@ -1,3 +1,4 @@
+import MyHead from "@/components/MyHead";
 import UserHeader from "@/components/UserHeader";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -74,6 +75,7 @@ const links = () => {
 
   return (
     <>
+      <MyHead title="Edit Links" />
       <div>
         <UserHeader />
         <main>
@@ -86,10 +88,10 @@ const links = () => {
                 {links.map((link, index) => (
                   <div
                     key={index}
-                    className="flex flex-col md:flex-row gap-4 py-3 md:px-5 justify-center"
+                    className="flex flex-col md:flex-row py-3 justify-center"
                   >
                     <div className="flex flex-col lg:flex-row md:ml-2 gap-3 w-full">
-                      <label>
+                      <label className="w-full">
                         URL:
                         <input
                           className="outline-none border-2 border-gray-200 shadow-sm rounded-lg md:ml-2 px-2 py-1 w-full"
@@ -100,7 +102,7 @@ const links = () => {
                           }
                         />
                       </label>
-                      <label>
+                      <label className="w-full">
                         Title:
                         <input
                           className="outline-none border-2 border-gray-200 shadow-sm rounded-lg md:ml-2 px-2 py-1 w-full"
@@ -111,7 +113,7 @@ const links = () => {
                           }
                         />
                       </label>
-                      <label>
+                      <label className="w-full">
                         Icon:
                         <input
                           className="outline-none border-2 border-gray-200 shadow-sm rounded-lg md:ml-2 px-2 py-1 w-full"
@@ -125,7 +127,7 @@ const links = () => {
                     </div>
 
                     <button
-                      className="bg-red-500 text-white px-4 py-2 rounded-md shadow-sm hover:scale-90"
+                      className="bg-red-500 text-white px-4 py-1 mt-6 md:mt-5 rounded-md shadow-sm hover:scale-90 md:ml-4 text-sm"
                       type="button"
                       onClick={() => handleRemoveLink(index)}
                     >

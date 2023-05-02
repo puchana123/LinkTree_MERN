@@ -3,10 +3,11 @@ import LinkBox from "@/components/LinkBox";
 import UserHeader from "@/components/UserHeader";
 import { toast } from "react-toastify";
 import UserContext from "@/context/userContext";
+import MyHead from "@/components/MyHead";
 
 const dashboard = () => {
   const [data, setData] = useState({});
-  const { setUserData } = useContext(UserContext);
+  const { setUserData, setIsLogin } = useContext(UserContext);
 
   useEffect(() => {
     if (!localStorage.getItem("LinkTreeToken"))
@@ -26,6 +27,7 @@ const dashboard = () => {
         if (data.status === "error") return toast.error("Error happened");
         setData(data.userData);
         setUserData(data.userData);
+        setIsLogin(true);
         localStorage.setItem("userHandle", data.userData.handle);
         toast.success(data.message);
       })
@@ -36,6 +38,7 @@ const dashboard = () => {
 
   return (
     <>
+      <MyHead title="Dashboard" />
       <div>
         <span className="header"></span>
         <UserHeader />
